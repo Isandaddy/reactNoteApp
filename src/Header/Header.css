@@ -1,0 +1,26 @@
+div.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 50px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+div.header > div.title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+div.header > div.title > span {
+  vertical-align: middle;
+}
+
+div.header > div.buttons > button {
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #ffffff;
+  cursor: pointer;
+}
