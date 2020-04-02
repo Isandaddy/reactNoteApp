@@ -18,3 +18,7 @@ div.list-item > div.content {
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
+
+div.list-item-active {
+  background-color: #eef3f8;
+}
