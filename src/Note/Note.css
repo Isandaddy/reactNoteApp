@@ -16,7 +16,7 @@ div.note > input.title {
   outline: 0;
 }
 
-div.note > textarea.note-content {
+div.note > textarea.note-contents {
   display: block;
   font-size: 16px;
   font-weight: 400;

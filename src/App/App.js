@@ -16,6 +16,25 @@ class App extends React.Component {
     this.setState({ activeId: id });
   };
 
+  //편집이벤트 핸들러
+  handleEditNote = (type, e) => {
+    console.log(type);
+    console.log(e);
+    //새 notes어레이 생성
+    //...전개연산자 좌항에 명시적으로 할당되지 않은 나머지 배열값 할당
+    const notes = [...this.state.notes];
+
+    //notes에서 현재 activeId와 일치하는 노트객체 찾기
+    const note = notes.find(item => item.id === this.state.activeId);
+
+    //객체의 속성에 값할당 note.title note.contents
+    note[type] = e.target.value;
+
+    //notes에 새 배열을 할당하여 state변경
+    this.setState({
+      notes
+    });
+  };
   render() {
     const { notes, activeId } = this.state;
     // 현재 활성화 된 객채를 찾아서 activeNote 변수에 할당한다.
@@ -36,7 +55,9 @@ class App extends React.Component {
           {/** activeNote가 존재할때 <Note/>를 랜더링
             <Note/>속성에 activeNote전달
           */}
-          {notes.length !== 0 && <Note note={activeNote} />}
+          {notes.length !== 0 && (
+            <Note note={activeNote} onEditNote={this.handleEditNote} />
+          )}
         </div>
       </div>
     );
