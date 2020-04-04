@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "../Header/Header";
 import List from "../List/List";
 import Note from "../Note/Note";
+import { generateId } from "../utils";
 
 class App extends React.Component {
   state = {
@@ -35,13 +36,30 @@ class App extends React.Component {
       notes
     });
   };
+
+  handleAddNote = () => {
+    //랜덤ID생성
+    const id = generateId();
+    this.setState({
+      notes: [
+        ...this.state.notes,
+        {
+          id,
+          title: "title",
+          contents: "contents"
+        }
+      ],
+      activeId: id
+    });
+  };
+
   render() {
     const { notes, activeId } = this.state;
     // 현재 활성화 된 객채를 찾아서 activeNote 변수에 할당한다.
     const activeNote = notes.filter(item => item.id === activeId)[0];
     return (
       <div className="app">
-        <Header />
+        <Header onAddNote={this.handleAddNote} />
         <div className="container">
           {/** 부모 컴포넌트에서 notes activeId, props를 건낸다
           이제 <List />는 notes와 activeId라는 props에 접근하여 데이터를 참조할 수 있습니다.
