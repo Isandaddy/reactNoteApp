@@ -3,7 +3,7 @@ import "./Header.css";
 
 class Header extends React.Component {
   render() {
-    const { onAddNote } = this.props;
+    const { onAddNote, onDeleteNote } = this.props;
     return (
       <div className="header">
         <div className="title">
@@ -11,7 +11,7 @@ class Header extends React.Component {
         </div>
         <div className="buttons">
           <button onClick={onAddNote}>add</button>
-          <button>delete</button>
+          <button onClick={onDeleteNote}>delete</button>
         </div>
       </div>
     );

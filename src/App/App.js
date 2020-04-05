@@ -8,19 +8,26 @@ import { generateId } from "../utils";
 class App extends React.Component {
   state = {
     //note정보를 담을 배열준비
-    notes: [],
+    notes: [
+      {
+        id: "init",
+        title: "열심히해보자",
+        contents: "tomato"
+      }
+    ],
     //리스트에서 유저가 선택하여 활성화된 노트의 id가 들어간다.
-    activeId: null
+    activeId: "init"
   };
-  //이벤트 핸들러 메소드
+  //Lis클릭 이벤트 핸들러 메소드
+  //리스트에서 유저가 선택하여 활성화된 노트의 id가 들어간다.
   handleListItemClick = id => {
     this.setState({ activeId: id });
   };
 
   //편집이벤트 핸들러
   handleEditNote = (type, e) => {
-    console.log(type);
-    console.log(e);
+    //console.log(type);
+    //console.log(e);
     //새 notes어레이 생성
     //...전개연산자 좌항에 명시적으로 할당되지 않은 나머지 배열값 할당
     const notes = [...this.state.notes];
@@ -53,13 +60,29 @@ class App extends React.Component {
     });
   };
 
+  handleDeleteNote = () => {
+    //현재 선택한 노트를 제외한 새로운 배열을 만든다.
+    const notes = this.state.notes.filter(
+      //활성화된 객체id 선택된id 제외 로직
+      item => item.id !== this.state.activeId
+    );
+    // 새로운 배열을 notes에 할당
+    this.setState({
+      notes,
+      activeId: notes.length === 0 ? null : notes[0].id
+    });
+  };
+
   render() {
     const { notes, activeId } = this.state;
     // 현재 활성화 된 객채를 찾아서 activeNote 변수에 할당한다.
     const activeNote = notes.filter(item => item.id === activeId)[0];
     return (
       <div className="app">
-        <Header onAddNote={this.handleAddNote} />
+        <Header
+          onAddNote={this.handleAddNote}
+          onDeleteNote={this.handleDeleteNote}
+        />
         <div className="container">
           {/** 부모 컴포넌트에서 notes activeId, props를 건낸다
           이제 <List />는 notes와 activeId라는 props에 접근하여 데이터를 참조할 수 있습니다.

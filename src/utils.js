@@ -3,6 +3,6 @@ export const generateId = () => {
     "_" +
     Math.random()
       .toString(36)
-      .subtr(2, 9)
+      .substr(2, 9)
   );
 };
